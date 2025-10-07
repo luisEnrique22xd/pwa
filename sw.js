@@ -1,10 +1,8 @@
 // Basic structure of a service worker file (sw.js)
 // 1. Name the cache and files to cache 
-const CACHE_NAME = ' my-site-cache-v1';
+const CACHE_NAME = ' mi-site-cache-v1';
 const urlsToCache = [
     "index.html",
-    // "styles.css",
-    // "app.js",
     "offline.html"
 ];
 
