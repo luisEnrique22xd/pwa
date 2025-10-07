@@ -15,7 +15,7 @@
     <button onclick="alert('hola desde la pwa')">Click</button>
     <script>
         if('serviceWorker' in navigator){
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('/repo/sw.js')
             .then(reg => console.log('Registro de SW exitoso', reg))
             .catch(err => console.warn('Error al tratar de registrar el SW', err))
         }
