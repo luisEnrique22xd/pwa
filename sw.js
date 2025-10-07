@@ -4,12 +4,12 @@ const CACHE_NAME = ' mi-site-cache-v1';
 const urlsToCache = [
     "index.html",
     "offline.html",
-    "/icons/icon-16x16.png",
-    "/icons/icon-32x32.png",
-    "/icons/icon-128x128.png",
-    "/icons/icon-192x192.png",
-    "/icons/icon-256x256.png",
-    "/icons/icon-512x512.png",
+    "icons/icon-16x16.png",
+    "icons/icon-32x32.png",
+    "icons/icon-128x128.png",
+    "icons/icon-192x192.png",
+    "icons/icon-256x256.png",
+    "icons/icon-512x512.png",
 
 ];
 
