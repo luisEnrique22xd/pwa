@@ -1,36 +1,33 @@
-// Basic structure of a service worker file (sw.js)
-// 1. Name the cache and files to cache 
-const CACHE_NAME = ' mi-site-cache-v1';
+// Estructura basica de un Service Worker
+
+// 1.Nombre del cache y archivos a cachear
+const CACHE_NAME = "mi-cache-v1";
 const urlsToCache = [
-    "index.html",
-    "offline.html",
-    "icons/icon-16x16.png",
-    "icons/icon-32x32.png",
-    "icons/icon-128x128.png",
-    "icons/icon-192x192.png",
-    "icons/icon-256x256.png",
-    "icons/icon-512x512.png",
+  "index.html", 
+  "offline.html"];
 
-];
+// 2.INSTALL -> se ejecuta al instalar el SW
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
+  );
+});
 
-//2. Install -> ejectuted when the service worker is intalled
-self.addEventListener("install", event =>{
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache=>{
-            cache.addAll(urlsToCache)
-        })
-    )
-})
-//3. Activate -> ejecuted the service worker is activated(clean old caches)
-self.addEventListener("activate", event=>{
-    event.waitUntil(
-        caches.keys().then(keys=>{
-            Promise.all(
-                keys.filter(key=>key !== CACHE_NAME).map(key =>caches.delete(key))
-            )
-        })
-    )
-})
+// 3.ACTIVATE -> se ejecuta al activarse (Limpia cache viejas)
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key))
+        )
+      )
+  );
+});
+
 // 4.FETCH -> se ejecuta cada vez que se haga una petición al servidor
 self.addEventListener("fetch", (event) => {
   event.respondWith(
@@ -39,6 +36,7 @@ self.addEventListener("fetch", (event) => {
         return response;
       }
       return fetch(event.request);
-    })
-  );
+    })
+  );
 });
+  
