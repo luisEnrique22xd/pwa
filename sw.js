@@ -27,16 +27,20 @@ self.addEventListener("activate", (event) => {
       )
   );
 });
-
 // 4.FETCH -> se ejecuta cada vez que se haga una petición al servidor
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
+      return response || fetch(event.request).catch(() => caches.match("offline.html"));
     })
   );
 });
   
+  
+//5. Push -> se ejecuta cuando se recibe una notificación push
+self.addEventListener("push", (event) => {
+    const data = event.data ? event.data.text() : "Notificacion sin texto";
+    event.waitUntil(
+        self.registration.showNotification("Mi pwa", {body:data})
+    );
+});
